@@ -1,0 +1,8 @@
+Time resolution is 1 ps
+
+Test has been started.
+
+ The test is over 
+ See the internal signals of the module on the waveform 
+
+$finish called at time : 840 ns : File "A:/Documents/RISC-V_CPU_2/Lab5/Lab5.srcs/sources_1/imports/lab_07.tb_processor_system.sv" Line 30
