@@ -1,0 +1,31 @@
+#-----------------------------------------------------------
+# Vivado v2025.1 (64-bit)
+# SW Build 6140274 on Thu May 22 00:12:29 MDT 2025
+# IP Build 6138677 on Thu May 22 03:10:11 MDT 2025
+# SharedData Build 6139179 on Tue May 20 17:58:58 MDT 2025
+# Start of session at: Sun Jun 14 22:06:58 2026
+# Process ID         : 5344
+# Current directory  : A:/Documents/RISC-V_CPU_2/Lab8
+# Command line       : vivado.exe -gui_launcher_event rodinguilauncherevent1316 A:\Documents\RISC-V_CPU_2\Lab8\Lab8.xpr
+# Log file           : A:/Documents/RISC-V_CPU_2/Lab8/vivado.log
+# Journal file       : A:/Documents/RISC-V_CPU_2/Lab8\vivado.jou
+# Running On         : DESKTOP-U21PP17
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26200
+# Processor Detail   : Intel(R) Core(TM) Ultra 5 225H
+# CPU Frequency      : 3686 MHz
+# CPU Physical cores : 14
+# CPU Logical cores  : 14
+# Host memory        : 16574 MB
+# Swap memory        : 1073 MB
+# Total Virtual      : 17648 MB
+# Available Virtual  : 7897 MB
+#-----------------------------------------------------------
+start_gui
+open_project A:/Documents/RISC-V_CPU_2/Lab8/Lab8.xpr
+update_compile_order -fileset sources_1
+import_files -norecurse A:/Downloads/nexys_riscv_unit.sv
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+add_files -fileset constrs_1 -norecurse A:/Downloads/nexys_a7_100t.xdc
+import_files -fileset constrs_1 A:/Downloads/nexys_a7_100t.xdc

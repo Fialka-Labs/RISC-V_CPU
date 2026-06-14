@@ -1,0 +1,29 @@
+#-----------------------------------------------------------
+# Vivado v2025.1 (64-bit)
+# SW Build 6140274 on Thu May 22 00:12:29 MDT 2025
+# IP Build 6138677 on Thu May 22 03:10:11 MDT 2025
+# SharedData Build 6139179 on Tue May 20 17:58:58 MDT 2025
+# Start of session at: Tue Jun  2 19:53:13 2026
+# Process ID         : 6592
+# Current directory  : A:/Documents/RISC-V_CPU_2/Lab5
+# Command line       : vivado.exe -gui_launcher_event rodinguilauncherevent2420 A:\Documents\RISC-V_CPU_2\Lab5\Lab5.xpr
+# Log file           : A:/Documents/RISC-V_CPU_2/Lab5/vivado.log
+# Journal file       : A:/Documents/RISC-V_CPU_2/Lab5\vivado.jou
+# Running On         : DESKTOP-U21PP17
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26200
+# Processor Detail   : Intel(R) Core(TM) Ultra 5 225H
+# CPU Frequency      : 3686 MHz
+# CPU Physical cores : 14
+# CPU Logical cores  : 14
+# Host memory        : 16574 MB
+# Swap memory        : 1073 MB
+# Total Virtual      : 17648 MB
+# Available Virtual  : 6770 MB
+#-----------------------------------------------------------
+start_gui
+open_project A:/Documents/RISC-V_CPU_2/Lab5/Lab5.xpr
+update_compile_order -fileset sources_1
+launch_simulation
+source lab_07_tb_processor_system.tcl
+close_sim

@@ -1,0 +1,33 @@
+Time resolution is 1 ps
+
+250.00 ns. Start programming lab_15_instr.mem
+ eady for flash starting from 0x00000000
+Error: Init message format is incorrect. Should be "ready for flash starting from 0xADDR"
+Time: 4290650 ns  Iteration: 0  Process: /bluster_pkg/rcv_data  Scope: bluster_pkg.rcv_data  File: A:/Documents/RISC-V_CPU_2/Lab9/Lab9.srcs/sources_1/imports/bluster_pkg.sv Line: 47
+3159092
+ inished write 0x00000044 bytes starting from 0x00000000
+Error: finish message format is incorrect. Should be "finished write 0xSIZE bytes starting from 0xADDR"
+Time: 17018250 ns  Iteration: 0  Process: /bluster_pkg/rcv_data  Scope: bluster_pkg.rcv_data  File: A:/Documents/RISC-V_CPU_2/Lab9/Lab9.srcs/sources_1/imports/bluster_pkg.sv Line: 52
+17030950.00 ns. Region has been programmed
+
+17030950.00 ns. Start programming lab_15_data.mem
+ eady for flash starting from 0x00800000
+Error: Init message format is incorrect. Should be "ready for flash starting from 0xADDR"
+Time: 21321350 ns  Iteration: 0  Process: /bluster_pkg/rcv_data  Scope: bluster_pkg.rcv_data  File: A:/Documents/RISC-V_CPU_2/Lab9/Lab9.srcs/sources_1/imports/bluster_pkg.sv Line: 47
+3159395
+ inished write 0x0000005c bytes starting from 0x00800000
+Error: finish message format is incorrect. Should be "finished write 0xSIZE bytes starting from 0xADDR"
+Time: 36361650 ns  Iteration: 0  Process: /bluster_pkg/rcv_data  Scope: bluster_pkg.rcv_data  File: A:/Documents/RISC-V_CPU_2/Lab9/Lab9.srcs/sources_1/imports/bluster_pkg.sv Line: 52
+36374350.00 ns. Region has been programmed
+
+36374350.00 ns. Start programming lab_15_char.mem
+ eady for flash starting from 0x07000000
+Error: Init message format is incorrect. Should be "ready for flash starting from 0xADDR"
+Time: 40664750 ns  Iteration: 0  Process: /bluster_pkg/rcv_data  Scope: bluster_pkg.rcv_data  File: A:/Documents/RISC-V_CPU_2/Lab9/Lab9.srcs/sources_1/imports/bluster_pkg.sv Line: 47
+3158580
+ inished write 0x00000024 bytes starting from 0x07000000
+Error: finish message format is incorrect. Should be "finished write 0xSIZE bytes starting from 0xADDR"
+Time: 50320350 ns  Iteration: 0  Process: /bluster_pkg/rcv_data  Scope: bluster_pkg.rcv_data  File: A:/Documents/RISC-V_CPU_2/Lab9/Lab9.srcs/sources_1/imports/bluster_pkg.sv Line: 52
+50333050.00 ns. Region has been programmed
+Flashing is complete
+$finish called at time : 50717050 ns : File "A:/Documents/RISC-V_CPU_2/Lab9/Lab9.srcs/sources_1/imports/lab_15.tb_bluster.sv" Line 50
