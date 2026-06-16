@@ -7,7 +7,7 @@ module CYBERcobra (
     output logic [31:0]  out_o
 );
 
-logic [31:0] imem;
+logic [31:0] imem_wire;
 logic [1:0]  ws; // Write Sourse, т.е. управление данными на входе WD
 logic        b; // branch, т.е. условный переход (перепрыгивание заданного количества команд)
 logic        j; // jump, т.е. безусловный переход
@@ -32,26 +32,26 @@ end
 
 always_comb
 begin
-    ws = imem[29:28];
+    ws = imem_wire[29:28];
     case(ws)
-        2'b00 : wd = {{9{imem[27]}}, imem[27:5]}; // Запись константы в регистровый файл
+        2'b00 : wd = {{9{imem_wire[27]}}, imem_wire[27:5]}; // Запись константы в регистровый файл
         2'b01 : wd = alu_o; // Запись результата АЛУ в регистровый файл
         2'b10 : wd = {{15{sw_i[15]}}, sw_i}; // Загрузка данных с внешних устройств
         default : wd = 32'd0; // Разрешение неопределённости при WS == 3
     endcase
     
-    b = imem[30];
-    j = imem[31];
-    if ((b && flag) || j) b_i = {{22{imem[12]}}, imem[12:5], 2'b0}; // Выполнение условного перехода
+    b = imem_wire[30];
+    j = imem_wire[31];
+    if ((b && flag) || j) b_i = {{22{imem_wire[12]}}, imem_wire[12:5], 2'b0}; // Выполнение условного перехода
     else b_i = 32'd4;
     
-    j = imem[31];
+    j = imem_wire[31];
     
 end
 
-instr_mem instr_mem(
+instr_mem imem(
     .read_addr_i(pc_o),
-    .read_data_o(imem));
+    .read_data_o(imem_wire));
    
 fulladder32 fulladder32(
     .a_i(pc_o),
@@ -62,9 +62,9 @@ fulladder32 fulladder32(
 register_file register_file(
     .clk_i(clk_i),
     .write_enable_i(!(b || j)), // Если не операция какого-либо перехода, то только в этом случае данные будут записаны в регистровый файл
-    .read_addr1_i(imem[22:18]), // Указание на то, из какого регистра будут браться данные на АЛУ
-    .read_addr2_i(imem[17:13]), // Аналогично 1 регистру
-    .write_addr_i(imem[4:0]), // Указание на то, в какой регистр запишутся данные
+    .read_addr1_i(imem_wire[22:18]), // Указание на то, из какого регистра будут браться данные на АЛУ
+    .read_addr2_i(imem_wire[17:13]), // Аналогично 1 регистру
+    .write_addr_i(imem_wire[4:0]), // Указание на то, в какой регистр запишутся данные
     .write_data_i(wd), // Запись результат АЛУ в указанный в WA регистр
     .read_data1_o(rd1),
     .read_data2_o(rd2));
@@ -72,7 +72,7 @@ register_file register_file(
 alu alu(
     .a_i(rd1),
     .b_i(rd2),
-    .alu_op_i(imem[27:23]), // Указание на то, какая операция АЛУ будет выполнена
+    .alu_op_i(imem_wire[27:23]), // Указание на то, какая операция АЛУ будет выполнена
     .result_o(alu_o),
     .flag_o(flag));
     
