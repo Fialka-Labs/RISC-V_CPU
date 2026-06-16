@@ -1,7 +1,0 @@
-Running: xsim.dir/lab_16_tb_coremark_behav/xsimk.exe -simmode gui -wdb lab_16_tb_coremark_behav.wdb -simrunnum 0 -socket 52877
-Design successfully loaded
-Design Loading Memory Usage: 11564 KB (Peak: 11564 KB)
-Design Loading CPU Usage: 0 ms
-Simulation completed
-Simulation Memory Usage: 20644 KB (Peak: 20644 KB)
-Simulation CPU Usage: 2062 ms

@@ -1,7 +1,0 @@
-Running: xsim.dir/lab_11_tb_processor_system_behav/xsimk.exe -simmode gui -wdb lab_11_tb_processor_system_behav.wdb -simrunnum 0 -socket 51891
-Design successfully loaded
-Design Loading Memory Usage: 11140 KB (Peak: 11140 KB)
-Design Loading CPU Usage: 15 ms
-Simulation completed
-Simulation Memory Usage: 12120 KB (Peak: 12120 KB)
-Simulation CPU Usage: 46 ms
