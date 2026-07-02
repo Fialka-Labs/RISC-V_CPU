@@ -69,7 +69,6 @@ logic [31:0] lsu_mem_wd;
 logic [31:0] lsu_mem_rd;
 logic        lsu_mem_ready;
 
-
 // Сигналы для мультиплексора
 logic        mult_req;
 logic        mult_we;
@@ -84,16 +83,18 @@ logic         sw_req;
 logic         led_req;
 logic         mem_req_periph;
 logic         ps2_req;
+logic         uart_tx_req;
 logic         vga_req;
 logic         timer_req;
 
-assign peripherial_address = lsu_mem_addr[31:24];
+assign peripherial_address = mult_addr[31:24];
 assign onehot_o = 256'd1 << peripherial_address;
 
 assign mem_req_periph = mult_req & onehot_o[0];
 assign sw_req =         mult_req & onehot_o[1];
 assign led_req =        mult_req & onehot_o[2];
 assign ps2_req =        mult_req & onehot_o[3];
+assign uart_tx_req =    mult_req & onehot_o[6];
 assign vga_req =        mult_req & onehot_o[7];
 assign timer_req =      mult_req & onehot_o[8];
 
@@ -101,6 +102,7 @@ logic [31:0] data_mem_rd;
 logic [31:0] sw_rd;
 logic [31:0] led_rd;
 logic [31:0] ps2_rd;
+logic [31:0] uart_tx_rd;
 logic [31:0] vga_rd;
 logic [31:0] timer_rd;
 
@@ -110,6 +112,7 @@ always_comb begin
         8'd1: lsu_mem_rd = sw_rd;
         8'd2: lsu_mem_rd = led_rd;
         8'd3: lsu_mem_rd = ps2_rd;
+        8'd6: lsu_mem_rd = uart_tx_rd;
         8'd7: lsu_mem_rd = vga_rd;
         8'd8: lsu_mem_rd = timer_rd;
     endcase
@@ -125,6 +128,9 @@ logic [31:0] bluster_data_wdata;
 logic        bluster_data_we;
 
 logic        bluster_core_reset;
+
+logic blustertx, uarttx;
+assign tx_o = bluster_core_reset? blustertx : uarttx;
 
 // Мультиплексор
 always_comb begin
@@ -144,7 +150,7 @@ always_comb begin
     end
 end
 
-//Память инструкций (старая)
+// Память инструкций (старая)
 /*instr_mem instr_mem(
     .read_addr_i(instr_addr),
     .read_data_o(instr)
@@ -165,7 +171,7 @@ bluster bluster(
     .clk_i(sysclk),
     .rst_i(rst),
     .rx_i(rx_i),
-    .tx_o(tx_o),
+    .tx_o(blustertx),
     .instr_addr_o(bluster_instr_addr),
     .instr_wdata_o(bluster_instr_wdata),
     .instr_we_o(bluster_instr_we),
@@ -291,7 +297,6 @@ vga_sb_ctrl vga_sb_ctrl(
     .vga_vs_o(vga_vs_o)
 );
 
-
 // uart_tx
 uart_tx_sb_ctrl uart_tx(
     .clk_i(sysclk),
@@ -300,19 +305,20 @@ uart_tx_sb_ctrl uart_tx(
     .req_i(uart_tx_req),
     .write_data_i(mult_wd),
     .write_enable_i(mult_we),
-    .read_data_o(uart_tx_rd)
+    .read_data_o(uart_tx_rd),
+    .tx_o(uarttx)
 );
 
 // Таймер
 timer_sb_ctrl timer(
     .clk_i(sysclk),
-    .rst_i(bluster_core_reset),
-    .req_i(),
+    .rst_i(rst),
+    .req_i(timer_req),
     .write_enable_i(mult_we),
     .addr_i({8'b0, mult_addr[23:0]}),
     .write_data_i(mult_wd),
     .read_data_o(timer_rd),
-    .ready_o(lsu_mem_ready),
+    .ready_o(),
     .interrupt_request_o(timer_irq_req)
 );
 
