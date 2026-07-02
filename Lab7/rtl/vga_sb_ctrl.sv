@@ -72,7 +72,7 @@ vgachargen VGA (
     //.char_map_req_i,                  // Запрос к карте символов
     .char_map_addr_i(addr_i[11:2]),     // Адрес ячейки карты символов
     //.char_map_we_i,                   // Разрешение записи байта
-    .char_map_be_i(mem_be_i ),          // Маска байтов для записи
+    .char_map_be_i(mem_be_i),          // Маска байтов для записи
     .char_map_wdata_i(write_data_i),    // ASCII-код символа для записи
     //.char_map_rdata_o,                // Данные чтения из карты
 
@@ -80,7 +80,7 @@ vgachargen VGA (
     //.col_map_req_i,                   // Запрос к палитре цветов
     .col_map_addr_i(addr_i[11:2]),      // Адрес ячейки палитры
     //.col_map_we_i,                    // Разрешение записи в палитру
-    .col_map_be_i(mem_be_i ),           // Маска байтов для записи
+    .col_map_be_i(mem_be_i),           // Маска байтов для записи
     .col_map_wdata_i(write_data_i),     // Код цвета для палитры
     //.col_map_rdata_o,                 // Данные чтения из палитры
 
@@ -88,7 +88,7 @@ vgachargen VGA (
     //.char_tiff_req_i,                 // Запрос к тайлам шрифта
     .char_tiff_addr_i(addr_i[11:2]),    // Адрес ячейки памяти тайлов
     //.char_tiff_we_i,                  // Разрешение записи в тайлы
-    //.char_tiff_be_i(mem_be_i),        // Маска байтов для записи
+    .char_tiff_be_i(mem_be_i),        // Маска байтов для записи
     .char_tiff_wdata_i(write_data_i),   // Данные для записи в тайлы шрифта
     //.char_tiff_rdata_o,               // Данные чтения из памяти тайлов
 
