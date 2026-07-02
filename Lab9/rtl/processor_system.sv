@@ -85,7 +85,7 @@ logic         mem_req_periph;
 logic         ps2_req;
 logic         vga_req;
 
-assign peripherial_address = lsu_mem_addr[31:24];
+assign peripherial_address = mult_addr[31:24];
 assign onehot_o = 256'd1 << peripherial_address;
 
 assign mem_req_periph = mult_req & onehot_o[0];
