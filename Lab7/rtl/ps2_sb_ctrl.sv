@@ -52,16 +52,16 @@ always_comb begin
     read_req_scan_code_is_unread = 0;
     write_req_reset = 0;
     
-    if(addr_i[31:24] == 8'h03) begin
+    if (addr_i[31:24] == 8'h03) begin
         case(addr_i[23:0])
             24'h000000: begin
-               if(read_req)  read_req_scan_code = 1;
+               if (read_req)  read_req_scan_code = 1;
             end
             24'h000004: begin
-               if(read_req)  read_req_scan_code_is_unread = 1;
+               if (read_req)  read_req_scan_code_is_unread = 1;
             end
             24'h000024: begin
-               if(write_req) write_req_reset = 1;
+               if (write_req) write_req_reset = 1;
             end
             default: ill_addr = 1;
         endcase
@@ -72,26 +72,26 @@ always_comb begin
 end
 
 always_ff@(posedge clk_i) begin
-    if(rst_i) begin
+    if (rst_i) begin
         scan_code <= '0;
         scan_code_is_unread <= '0;
     end
     else begin
-        if(keycode_valid) begin
+        if (keycode_valid) begin
             scan_code <= keycode;
             scan_code_is_unread <= 1;
         end
         else begin
-            if(read_req_scan_code) begin          // Чтение по адресу скан-кода               
+            if (read_req_scan_code) begin          // Чтение по адресу скан-кода               
                 read_data_o <= {24'b0, scan_code};
                 scan_code_is_unread <= '0;
             end
-            if(interrupt_return_i ) scan_code_is_unread <= '0;
+            if (interrupt_return_i ) scan_code_is_unread <= '0;
         end
-        if(read_req_scan_code_is_unread) begin    // Чтение флага scan_code_is_unread
+        if (read_req_scan_code_is_unread) begin    // Чтение флага scan_code_is_unread
             read_data_o <= {31'b0, scan_code_is_unread};
         end
-        if(write_req_reset) begin                 // Запись сброса
+        if (write_req_reset) begin                 // Запись сброса
             scan_code <= '0;
             scan_code_is_unread <= '0;
         end
