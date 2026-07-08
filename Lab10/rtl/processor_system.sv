@@ -312,7 +312,7 @@ uart_tx_sb_ctrl uart_tx(
 // Таймер
 timer_sb_ctrl timer(
     .clk_i(sysclk),
-    .rst_i(rst),
+    .rst_i(bluster_core_reset),
     .req_i(timer_req),
     .write_enable_i(mult_we),
     .addr_i({8'b0, mult_addr[23:0]}),
