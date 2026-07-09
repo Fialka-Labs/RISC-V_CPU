@@ -18,46 +18,45 @@ module vga_sb_ctrl (
     output logic        vga_vs_o
 );
     
-logic char_map_req_i;
-logic char_map_we_i;
-logic char_map_rdata_o;
+logic        char_map_req_i;
+logic        char_map_we_i;
+logic [31:0] char_map_rdata_o;
 
-logic col_map_req_i;
-logic col_map_we_i;
-logic col_map_rdata_o;
+logic        col_map_req_i;
+logic        col_map_we_i;
+logic [31:0] col_map_rdata_o;
 
-logic char_tiff_req_i;
-logic char_tiff_we_i;
-logic char_tiff_rdata_o;
+logic        char_tiff_req_i;
+logic        char_tiff_we_i;
+logic [31:0] char_tiff_rdata_o;
 
 always_comb begin
     char_map_req_i = 0;
     char_map_we_i = 0;
-    char_map_rdata_o = 0;
 
     col_map_req_i = 0;
     col_map_we_i = 0;
-    col_map_rdata_o = 0;
 
     char_tiff_req_i = 0;
     char_tiff_we_i = 0;
-    char_tiff_rdata_o = 0;
+    
+    read_data_o = 0;
     
     case(addr_i[13:12])
         2'b00: begin
             char_map_req_i = req_i;
-            char_map_we_i = mem_be_i;
-            char_map_rdata_o = read_data_o;
+            char_map_we_i = write_enable_i;
+            read_data_o = char_map_rdata_o;
         end
         2'b01: begin
             col_map_req_i = req_i;
-            col_map_we_i = mem_be_i;
-            col_map_rdata_o = read_data_o;
+            col_map_we_i = write_enable_i;
+            read_data_o = col_map_rdata_o;
         end
         2'b10: begin
             char_tiff_req_i = req_i;
-            char_tiff_we_i = mem_be_i;
-            char_tiff_rdata_o = read_data_o;
+            char_tiff_we_i = write_enable_i;
+            read_data_o = char_tiff_rdata_o;
         end
         default: ;
     endcase
@@ -69,28 +68,28 @@ vgachargen VGA (
     .rst_i(rst_i),         // Сигнал сброса
 
     // Интерфейс карты символов
-    //.char_map_req_i,                  // Запрос к карте символов
-    .char_map_addr_i(addr_i[11:2]),     // Адрес ячейки карты символов
-    //.char_map_we_i,                   // Разрешение записи байта
-    .char_map_be_i(mem_be_i),          // Маска байтов для записи
-    .char_map_wdata_i(write_data_i),    // ASCII-код символа для записи
-    //.char_map_rdata_o,                // Данные чтения из карты
+    .char_map_req_i(char_map_req_i),     // Запрос к карте символов
+    .char_map_addr_i(addr_i[11:2]),      // Адрес ячейки карты символов
+    .char_map_we_i(char_map_we_i),       // Разрешение записи байта
+    .char_map_be_i(mem_be_i),            // Маска байтов для записи
+    .char_map_wdata_i(write_data_i),     // ASCII-код символа для записи
+    .char_map_rdata_o(char_map_rdata_o), // Данные чтения из карты
 
     // Интерфейс палитры цветов
-    //.col_map_req_i,                   // Запрос к палитре цветов
-    .col_map_addr_i(addr_i[11:2]),      // Адрес ячейки палитры
-    //.col_map_we_i,                    // Разрешение записи в палитру
+    .col_map_req_i(col_map_req_i),     // Запрос к палитре цветов
+    .col_map_addr_i(addr_i[11:2]),     // Адрес ячейки палитры
+    .col_map_we_i(col_map_we_i),       // Разрешение записи в палитру
     .col_map_be_i(mem_be_i),           // Маска байтов для записи
-    .col_map_wdata_i(write_data_i),     // Код цвета для палитры
-    //.col_map_rdata_o,                 // Данные чтения из палитры
+    .col_map_wdata_i(write_data_i),    // Код цвета для палитры
+    .col_map_rdata_o(col_map_rdata_o), // Данные чтения из палитры
 
     // Интерфейс тайлов шрифта
-    //.char_tiff_req_i,                 // Запрос к тайлам шрифта
-    .char_tiff_addr_i(addr_i[11:2]),    // Адрес ячейки памяти тайлов
-    //.char_tiff_we_i,                  // Разрешение записи в тайлы
-    .char_tiff_be_i(mem_be_i),        // Маска байтов для записи
-    .char_tiff_wdata_i(write_data_i),   // Данные для записи в тайлы шрифта
-    //.char_tiff_rdata_o,               // Данные чтения из памяти тайлов
+    .char_tiff_req_i(char_tiff_req_i),     // Запрос к тайлам шрифта
+    .char_tiff_addr_i(addr_i[11:2]),       // Адрес ячейки памяти тайлов
+    .char_tiff_we_i(char_tiff_we_i),       // Разрешение записи в тайлы
+    .char_tiff_be_i(mem_be_i),             // Маска байтов для записи
+    .char_tiff_wdata_i(write_data_i),      // Данные для записи в тайлы шрифта
+    .char_tiff_rdata_o(char_tiff_rdata_o), // Данные чтения из памяти тайлов
 
     .vga_r_o(vga_r_o),   // Красный канал VGA
     .vga_g_o(vga_g_o),   // Зеленый канал VGA
