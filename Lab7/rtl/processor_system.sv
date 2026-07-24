@@ -55,9 +55,9 @@ logic        sw_irq_ret;
 logic        ps2_irq_req;
 logic        ps2_irq_ret;
 
-assign irq_req = {14'b0, ps2_irq_req, sw_irq_req};
-assign sw_irq_ret  = irq_ret[0];
-assign ps2_irq_ret = irq_ret[1];
+assign irq_req = {14'b0, sw_irq_req, ps2_irq_req};
+assign sw_irq_ret  = irq_ret[1];
+assign ps2_irq_ret = irq_ret[0];
 
 // Сигналы для LSU
 logic        lsu_mem_req;
