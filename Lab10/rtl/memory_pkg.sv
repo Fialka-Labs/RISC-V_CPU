@@ -10,7 +10,7 @@ See https://github.com/MPSU/APS/blob/master/LICENSE file for licensing details.
 */
 package memory_pkg;
 
-  localparam INSTR_MEM_SIZE_BYTES = 32'h20000;
+  localparam INSTR_MEM_SIZE_BYTES = 32'h8000;
   localparam INSTR_MEM_SIZE_WORDS = INSTR_MEM_SIZE_BYTES / 4;
   localparam DATA_MEM_SIZE_BYTES  = 32'h4000;
   localparam DATA_MEM_SIZE_WORDS  = DATA_MEM_SIZE_BYTES / 4;
